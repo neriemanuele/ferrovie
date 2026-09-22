@@ -20,8 +20,21 @@
       </a>
 
       <form id="line-form" class="line-form" autocomplete="off">
-        <label class="sr-only" for="line-input">Voce Wikipedia della linea</label>
-        <input id="line-input" name="linea" type="text" inputmode="search" spellcheck="false" value="Ferrovia Milano-Bologna" aria-describedby="input-help">
+        <label class="sr-only" for="line-select">Seleziona la linea ferroviaria</label>
+        <select id="line-select" name="linea" aria-label="Linea ferroviaria">
+          <option value="Ferrovia Milano-Bologna">Piacenza–Bologna</option>
+          <option value="Ferrovia Fidenza-Salsomaggiore">Fidenza–Salsomaggiore</option>
+          <option value="Ferrovia Bologna-Pistoia">Bologna–Pistoia</option>
+          <option value="Ferrovia Bologna-Ancona">Bologna–Rimini</option>
+          <option value="Ferrovia Castel Bolognese-Ravenna">Castel Bolognese–Ravenna</option>
+          <option value="Ferrovia Faenza-Ravenna">Faenza–Ravenna</option>
+          <option value="Ferrovia Ferrara-Rimini">Ferrara–Rimini</option>
+          <option value="Ferrovia Padova-Bologna">Occhiobello–Bologna</option>
+          <option value="Ferrovia Bologna-Firenze (direttissima)">Bologna–Prato</option>
+          <option value="Ferrovia Verona-Bologna">Poggio Rusco–Bologna</option>
+          <option value="Linea di cintura di Bologna">Lavino–Bologna San Ruffillo</option>
+          <option value="Ferrovia Verona-Mantova-Modena">Suzzara–Modena</option>
+        </select>
         <button type="submit">Visualizza</button>
       </form>
     </header>
@@ -59,7 +72,7 @@
       <section id="empty" class="empty" hidden>
         <h1>Schema non trovato</h1>
         <p id="empty-copy">Nella voce indicata non è stato trovato un diagramma intitolato “Stazioni e fermate”.</p>
-        <p id="input-help">Inserisci il titolo esatto della voce Wikipedia, per esempio <button id="example-line" type="button">Ferrovia Parma-La Spezia</button>.</p>
+        <p>Seleziona un’altra linea dall’elenco in alto.</p>
       </section>
     </main>
 
