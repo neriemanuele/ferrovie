@@ -1,10 +1,24 @@
 const WIKI_ORIGIN = "https://it.wikipedia.org";
 const API_URL = `${WIKI_ORIGIN}/w/api.php`;
-const DEFAULT_LINE = "Ferrovia Milano-Bologna";
+const LINES = [
+  { label: "Piacenza–Bologna", article: "Ferrovia Milano-Bologna" },
+  { label: "Fidenza–Salsomaggiore", article: "Ferrovia Fidenza-Salsomaggiore" },
+  { label: "Bologna–Pistoia", article: "Ferrovia Bologna-Pistoia" },
+  { label: "Bologna–Rimini", article: "Ferrovia Bologna-Ancona" },
+  { label: "Castel Bolognese–Ravenna", article: "Ferrovia Castel Bolognese-Ravenna" },
+  { label: "Faenza–Ravenna", article: "Ferrovia Faenza-Ravenna" },
+  { label: "Ferrara–Rimini", article: "Ferrovia Ferrara-Rimini" },
+  { label: "Occhiobello–Bologna", article: "Ferrovia Padova-Bologna" },
+  { label: "Bologna–Prato", article: "Ferrovia Bologna-Firenze (direttissima)" },
+  { label: "Poggio Rusco–Bologna", article: "Ferrovia Verona-Bologna" },
+  { label: "Lavino–Bologna San Ruffillo", article: "Linea di cintura di Bologna" },
+  { label: "Suzzara–Modena", article: "Ferrovia Verona-Mantova-Modena" }
+];
+const DEFAULT_LINE = LINES[0];
 
 const elements = {
   form: document.querySelector("#line-form"),
-  input: document.querySelector("#line-input"),
+  select: document.querySelector("#line-select"),
   heading: document.querySelector("#heading"),
   title: document.querySelector("#page-title"),
   sourceLink: document.querySelector("#source-link"),
@@ -17,13 +31,26 @@ const elements = {
   attribution: document.querySelector("#attribution"),
   licenseSource: document.querySelector("#license-source"),
   empty: document.querySelector("#empty"),
-  emptyCopy: document.querySelector("#empty-copy"),
-  exampleLine: document.querySelector("#example-line")
+  emptyCopy: document.querySelector("#empty-copy")
 };
 
 function normalizeTitle(value) {
-  const decoded = decodeURIComponent(String(value || "").replace(/\+/g, " "));
-  return decoded.replace(/_/g, " ").replace(/\s+/g, " ").trim() || DEFAULT_LINE;
+  try {
+    return decodeURIComponent(String(value || "").replace(/\+/g, " "))
+      .replace(/_/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  } catch {
+    return String(value || "").replace(/_/g, " ").replace(/\s+/g, " ").trim();
+  }
+}
+
+function resolveLine(value) {
+  const normalized = normalizeTitle(value).toLocaleLowerCase("it");
+  return LINES.find((line) =>
+    line.article.toLocaleLowerCase("it") === normalized ||
+    line.label.toLocaleLowerCase("it") === normalized
+  ) || DEFAULT_LINE;
 }
 
 function wikiPageUrl(title) {
@@ -48,21 +75,6 @@ async function getJson(url) {
   const data = await response.json();
   if (data.error) throw new Error(data.error.info || "Errore restituito da Wikipedia");
   return data;
-}
-
-function cleanHeading(value) {
-  return String(value || "")
-    .replace(/<[^>]+>/g, "")
-    .replace(/&amp;/gi, "&")
-    .replace(/\s+/g, " ")
-    .trim()
-    .toLocaleLowerCase("it");
-}
-
-function findPathSection(sections) {
-  const exact = sections.find((section) => cleanHeading(section.line) === "percorso");
-  if (exact) return exact.index;
-  return sections.find((section) => /percorso|tracciato|stazioni e fermate/.test(cleanHeading(section.line)))?.index;
 }
 
 function textMatchesDiagramHeading(value) {
@@ -139,32 +151,28 @@ function updateLocation(title) {
   history.replaceState({ title }, "", url);
 }
 
-async function loadLine(rawTitle, shouldUpdateLocation = true) {
-  const title = normalizeTitle(rawTitle);
-  elements.input.value = title;
+async function loadLine(rawValue, shouldUpdateLocation = true) {
+  const line = resolveLine(rawValue);
+  elements.select.value = line.article;
   elements.statusTitle.textContent = "Caricamento dello schema…";
   elements.statusCopy.textContent = "Recupero la versione più recente da Wikipedia.";
   setView("loading");
 
   try {
-    const metadata = await getJson(apiUrl({ page: title, prop: "sections" }));
-    const canonicalTitle = metadata.parse?.title || title;
-    const sectionIndex = findPathSection(metadata.parse?.sections || []);
-    if (!sectionIndex) throw new Error("La voce non contiene una sezione Percorso riconoscibile.");
-
-    const section = await getJson(apiUrl({ page: canonicalTitle, prop: "text", section: sectionIndex }));
+    const page = await getJson(apiUrl({ page: line.article, prop: "text" }));
+    const canonicalTitle = page.parse?.title || line.article;
     const template = document.createElement("template");
-    template.innerHTML = section.parse?.text || "";
+    template.innerHTML = page.parse?.text || "";
     const table = selectDiagram(template.content);
-    if (!table) throw new Error("La sezione Percorso non contiene un diagramma riconoscibile.");
+    if (!table) throw new Error("La voce non contiene un diagramma riconoscibile.");
 
     const pageUrl = wikiPageUrl(canonicalTitle);
     elements.diagram.replaceChildren(prepareDiagram(table));
-    elements.title.textContent = canonicalTitle;
-    elements.sourceLink.href = `${pageUrl}#Percorso`;
+    elements.title.textContent = line.label;
+    elements.sourceLink.href = pageUrl;
     elements.licenseSource.href = pageUrl;
-    document.title = `${canonicalTitle} · Stazioni e fermate`;
-    if (shouldUpdateLocation) updateLocation(canonicalTitle);
+    document.title = `${line.label} · Stazioni e fermate`;
+    if (shouldUpdateLocation) updateLocation(line.article);
     setView("result");
   } catch (error) {
     elements.emptyCopy.textContent = error instanceof Error ? error.message : "Non è stato possibile caricare lo schema.";
@@ -175,10 +183,10 @@ async function loadLine(rawTitle, shouldUpdateLocation = true) {
 
 elements.form.addEventListener("submit", (event) => {
   event.preventDefault();
-  loadLine(elements.input.value);
+  loadLine(elements.select.value);
 });
 
-elements.exampleLine.addEventListener("click", () => loadLine("Ferrovia Parma-La Spezia"));
+elements.select.addEventListener("change", () => loadLine(elements.select.value));
 
 elements.copyLink.addEventListener("click", async () => {
   try {
@@ -192,9 +200,9 @@ elements.copyLink.addEventListener("click", async () => {
 });
 
 window.addEventListener("popstate", () => {
-  const title = new URLSearchParams(window.location.search).get("linea") || DEFAULT_LINE;
+  const title = new URLSearchParams(window.location.search).get("linea") || DEFAULT_LINE.article;
   loadLine(title, false);
 });
 
-const initialTitle = new URLSearchParams(window.location.search).get("linea") || DEFAULT_LINE;
+const initialTitle = new URLSearchParams(window.location.search).get("linea") || DEFAULT_LINE.article;
 loadLine(initialTitle, false);
