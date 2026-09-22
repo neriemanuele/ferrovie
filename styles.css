@@ -25,7 +25,7 @@ body {
     var(--soft);
 }
 
-button, input { font: inherit; }
+button, select { font: inherit; }
 
 button, a { -webkit-tap-highlight-color: transparent; }
 
@@ -91,19 +91,20 @@ button, a { -webkit-tap-highlight-color: transparent; }
   margin-left: auto;
 }
 
-.line-form input {
+.line-form select {
   min-width: 0;
   flex: 1 1 auto;
   height: 44px;
-  padding: 0 0.95rem;
+  padding: 0 2.6rem 0 0.95rem;
   color: var(--ink);
   background: #fff;
   border: 1px solid transparent;
   border-radius: 8px;
   outline: none;
+  cursor: pointer;
 }
 
-.line-form input:focus {
+.line-form select:focus {
   border-color: #8fc5f4;
   box-shadow: 0 0 0 3px rgba(143,197,244,.27);
 }
