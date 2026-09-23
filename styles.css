@@ -183,18 +183,6 @@ h1 {
 .source-link { background: transparent; }
 .quiet-button:hover, .source-link:hover { border-color: #91a5b8; }
 
-.source-note {
-  display: inline-flex;
-  align-items: center;
-  min-height: 40px;
-  padding: 0 0.9rem;
-  color: var(--rail);
-  font-size: 0.9rem;
-  background: #e9f0f6;
-  border: 1px solid #c7d6e3;
-  border-radius: 7px;
-}
-
 .status, .empty {
   display: flex;
   align-items: center;
@@ -344,29 +332,17 @@ h1 {
   transform: translateX(-50%);
 }
 
-.route-node {
+.route-icon {
   position: absolute;
   z-index: 2;
   top: 50%;
   left: 50%;
   display: block;
-  background: #fff;
   transform: translate(-50%, -50%);
 }
 
-.route-station .route-node {
-  width: 22px;
-  height: 15px;
-  border: 3px solid #b62f2f;
-  border-radius: 2px;
-}
-
-.route-stop .route-node {
-  width: 12px;
-  height: 12px;
-  border: 3px solid #b62f2f;
-  border-radius: 50%;
-}
+.route-station-icon { width: 20px; height: 20px; }
+.route-bridge-icon { width: 26px; height: 26px; }
 
 .route-symbol.has-branch::after {
   position: absolute;
@@ -381,7 +357,7 @@ h1 {
 }
 
 .route-place { font-size: 1rem; }
-.route-place em { color: #35475a; }
+.route-bridge .route-place { color: #35475a; }
 
 .route-details {
   color: var(--muted);
@@ -391,31 +367,6 @@ h1 {
 .route-details > * { display: block; }
 .route-details small { margin-top: 0.2rem; color: #7b4c2d; }
 .route-connection { color: var(--rail); }
-
-.custom-route-legend {
-  display: flex;
-  gap: 0.75rem 1.4rem;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-  color: var(--muted);
-  font-size: 0.78rem;
-}
-
-.custom-route-legend span {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.legend-symbol {
-  display: inline-block;
-  flex: 0 0 auto;
-  background: #fff;
-  border: 3px solid #b62f2f;
-}
-
-.station-symbol { width: 18px; height: 13px; border-radius: 2px; }
-.stop-symbol { width: 11px; height: 11px; border-radius: 50%; }
 
 .attribution {
   margin: 1rem 0 0;
