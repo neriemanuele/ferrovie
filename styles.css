@@ -183,6 +183,18 @@ h1 {
 .source-link { background: transparent; }
 .quiet-button:hover, .source-link:hover { border-color: #91a5b8; }
 
+.source-note {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 0.9rem;
+  color: var(--rail);
+  font-size: 0.9rem;
+  background: #e9f0f6;
+  border: 1px solid #c7d6e3;
+  border-radius: 7px;
+}
+
 .status, .empty {
   display: flex;
   align-items: center;
@@ -240,6 +252,171 @@ h1 {
 .diagram img { max-width: none; }
 .diagram .mw-editsection, .diagram .noprint { display: none !important; }
 
+.diagram.custom-diagram {
+  width: 100%;
+  min-width: 760px;
+  padding: clamp(1rem, 3vw, 2.25rem);
+}
+
+.custom-route-wrap {
+  width: min(900px, 100%);
+  margin: 0 auto;
+}
+
+.custom-route-summary {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.custom-route-summary span {
+  padding: 0.38rem 0.68rem;
+  color: var(--rail);
+  font-size: 0.82rem;
+  background: #eef3f7;
+  border: 1px solid #d2dee8;
+  border-radius: 999px;
+}
+
+.custom-route {
+  width: 100%;
+  margin: 0 !important;
+  table-layout: fixed;
+  border-collapse: collapse !important;
+  color: var(--ink);
+  background: #fff !important;
+  border: 1px solid var(--line);
+}
+
+.custom-route caption {
+  padding: 0.85rem 1rem;
+  color: #fff;
+  font-size: 1rem;
+  text-align: left;
+  background: var(--rail);
+}
+
+.custom-route .km-column { width: 8.5rem; }
+.custom-route .track-column { width: 5.5rem; }
+.custom-route .place-column { width: 17rem; }
+
+.custom-route th {
+  padding: 0.65rem 0.8rem;
+  color: var(--muted);
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  text-align: left;
+  text-transform: uppercase;
+  background: #f5f7f9;
+  border-bottom: 1px solid var(--line);
+}
+
+.custom-route td {
+  height: 64px;
+  padding: 0.55rem 0.8rem;
+  vertical-align: middle;
+  border-bottom: 1px solid #e9eef2;
+}
+
+.custom-route tbody tr:last-child td { border-bottom: 0; }
+
+.route-km {
+  color: var(--muted);
+  font-size: 0.86rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.route-symbol {
+  position: relative;
+  padding: 0 !important;
+}
+
+.route-symbol::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  content: "";
+  background: #b62f2f;
+  transform: translateX(-50%);
+}
+
+.route-node {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  display: block;
+  background: #fff;
+  transform: translate(-50%, -50%);
+}
+
+.route-station .route-node {
+  width: 22px;
+  height: 15px;
+  border: 3px solid #b62f2f;
+  border-radius: 2px;
+}
+
+.route-stop .route-node {
+  width: 12px;
+  height: 12px;
+  border: 3px solid #b62f2f;
+  border-radius: 50%;
+}
+
+.route-symbol.has-branch::after {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 52%;
+  height: 4px;
+  content: "";
+  background: #b62f2f;
+  transform: translateY(-50%);
+}
+
+.route-place { font-size: 1rem; }
+.route-place em { color: #35475a; }
+
+.route-details {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.route-details > * { display: block; }
+.route-details small { margin-top: 0.2rem; color: #7b4c2d; }
+.route-connection { color: var(--rail); }
+
+.custom-route-legend {
+  display: flex;
+  gap: 0.75rem 1.4rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.custom-route-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.legend-symbol {
+  display: inline-block;
+  flex: 0 0 auto;
+  background: #fff;
+  border: 3px solid #b62f2f;
+}
+
+.station-symbol { width: 18px; height: 13px; border-radius: 2px; }
+.stop-symbol { width: 11px; height: 11px; border-radius: 50%; }
+
 .attribution {
   margin: 1rem 0 0;
   color: var(--muted);
@@ -278,6 +455,7 @@ h1 {
   .heading { align-items: flex-start; flex-direction: column; gap: 1rem; }
   .actions { justify-content: flex-start; }
   main { width: min(100% - 1rem, 1180px); }
+  .diagram.custom-diagram { min-width: 680px; }
 }
 
 @media print {
