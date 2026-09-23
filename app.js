@@ -28,7 +28,6 @@ const elements = {
   title: document.querySelector("#page-title"),
   subtitle: document.querySelector("#page-subtitle"),
   sourceLink: document.querySelector("#source-link"),
-  customSource: document.querySelector("#custom-source"),
   copyLink: document.querySelector("#copy-link"),
   status: document.querySelector("#status"),
   statusTitle: document.querySelector("#status-title"),
@@ -163,12 +162,14 @@ function prepareDiagram(table) {
 
 const FAENZA_LAVEZZOLA_STOPS = [
   { km: "17+052", name: "Faenza", kind: "station", branch: "per Bologna, Firenze e Rimini" },
+  { km: "16+107", name: "Ponte", kind: "bridge", note: "opera indicata nel Fascicolo Linea 85" },
   { km: "8+137 / 7+621", name: "Granarolo Faentino", kind: "station", branch: "per Ravenna", note: "termine tratto elettrificato da Faenza" },
-  { km: "4+189", name: "Cotignola", kind: "stop" },
+  { km: "4+189", name: "Cotignola", kind: "station" },
   { km: "13+968 / 0+000", name: "Lugo", kind: "station", branch: "per Castel Bolognese e Ravenna", note: "cambio progressiva chilometrica" },
-  { km: "5+442", name: "Sant’Agata sul Santerno", kind: "stop" },
+  { km: "4+000 circa", name: "Ponte sul fiume Santerno", kind: "bridge", note: "tra Lugo e Sant’Agata sul Santerno" },
+  { km: "5+442", name: "Sant’Agata sul Santerno", kind: "station" },
   { km: "8+182", name: "Massa Lombarda", kind: "station" },
-  { km: "13+062", name: "San Patrizio", kind: "stop" },
+  { km: "13+062", name: "San Patrizio", kind: "station" },
   { km: "15+423", name: "Conselice", kind: "station" },
   { km: "18+516", name: "Conselice Zona Industriale", kind: "station" },
   { km: "22+196", name: "Lavezzola", kind: "station", branch: "per Ferrara e Rimini" }
@@ -205,11 +206,15 @@ function renderCustomDiagram() {
 
     const symbol = document.createElement("td");
     symbol.className = `route-symbol${stop.branch ? " has-branch" : ""}`;
-    symbol.innerHTML = `<span class="route-node" aria-hidden="true"></span>`;
+    if (stop.kind === "bridge") {
+      symbol.innerHTML = `<img class="route-icon route-bridge-icon" src="https://upload.wikimedia.org/wikipedia/commons/d/df/BSicon_WBR%C3%9CCKE1_red.svg" width="26" height="26" alt="Ponte">`;
+    } else {
+      symbol.innerHTML = `<img class="route-icon route-station-icon" src="https://upload.wikimedia.org/wikipedia/commons/7/76/BSicon_BHF.svg" width="20" height="20" alt="Stazione">`;
+    }
 
     const place = document.createElement("td");
     place.className = "route-place";
-    const name = document.createElement(stop.kind === "station" ? "strong" : "em");
+    const name = document.createElement(stop.kind === "bridge" ? "span" : "strong");
     name.textContent = stop.name;
     place.append(name);
 
@@ -232,21 +237,12 @@ function renderCustomDiagram() {
   });
   table.append(body);
 
-  const legend = document.createElement("div");
-  legend.className = "custom-route-legend";
-  legend.innerHTML = `
-    <span><i class="legend-symbol station-symbol" aria-hidden="true"></i>stazione / località di servizio</span>
-    <span><i class="legend-symbol stop-symbol" aria-hidden="true"></i>fermata</span>
-    <span>PK riportate nel FL 85; doppia PK nei punti di cambio progressiva</span>
-  `;
-
-  wrapper.append(summary, table, legend);
+  wrapper.append(summary, table);
   return wrapper;
 }
 
 function setSourceMode(isCustom) {
   elements.sourceLink.hidden = isCustom;
-  elements.customSource.hidden = !isCustom;
   elements.wikiAttribution.hidden = isCustom;
   elements.customAttribution.hidden = !isCustom;
 }
