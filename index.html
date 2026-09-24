@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@500&display=swap">
     <link rel="stylesheet" href="https://it.wikipedia.org/w/load.php?lang=it&modules=mediawiki.skinning.content.parsoid%7Cmediawiki.skinning.interface%7Csite.styles&only=styles&skin=vector-2022">
-    <link rel="stylesheet" href="./styles.css?v=6">
+    <link rel="stylesheet" href="./styles.css?v=7">
   </head>
   <body>
     <header class="topbar">
@@ -25,8 +25,13 @@
       <form id="line-form" class="line-form" autocomplete="off">
         <label class="sr-only" for="line-select">Seleziona la linea ferroviaria</label>
         <select id="line-select" name="linea" aria-label="Linea ferroviaria">
-          <option value="Ferrovia Milano-Bologna">Piacenza–Bologna</option>
-          <option value="Ferrovia Fidenza-Salsomaggiore">Fidenza–Salsomaggiore</option>
+          <option value="Ferrovia Milano-Bologna">Piacenza-Bologna</option>
+          <option value="Ferrovia Alessandria-Piacenza">Castel San Giovanni-Piacenza</option>
+          <option value="Ferrovia Milano-Bologna">Codogno-Piacenza</option>
+          <option value="Ferrovia Fidenza-Salsomaggiore">Fidenza-Salsomaggiore Terme</option>
+          <option value="Ferrovia Fidenza-Fornovo">Fidenza-Fornovo</option>
+          <option value="Ferrovia Pontremolese">Parma-Vezzano Ligure (Pontremolese)</option>
+          <option value="Ferrovia Brescia-Parma">Parma-Mezzani Rondani</option>
           <option value="Ferrovia Bologna-Pistoia">Bologna–Pistoia</option>
           <option value="Ferrovia Bologna-Ancona">Bologna–Rimini</option>
           <option value="Ferrovia Castel Bolognese-Ravenna">Castel Bolognese–Ravenna</option>
@@ -37,7 +42,20 @@
           <option value="Ferrovia Verona-Bologna">Poggio Rusco–Bologna</option>
           <option value="Linea di cintura di Bologna">Lavino–Bologna San Ruffillo</option>
           <option value="Ferrovia Verona-Mantova-Modena">Suzzara–Modena</option>
-          <option value="Schema Faenza-Lavezzola FL85">Faenza–Lavezzola</option>
+          <option value="Schema Faenza-Lavezzola FL85">Faenza-Lavezzola</option>
+          <option value="Ferrovia Cremona-Fidenza">Cremona-Fidenza</option>
+          <option value="Ferrovia Faentina">Faenza-Marradi</option>
+          <option value="Ferrovia Milano-Bologna (alta velocità)">Milano-Bologna AV/AC</option>
+          <option value="Ferrovia Bologna-Firenze (alta velocità)">Bologna-Firenze AV/AC</option>
+          <option value="Ferrovia Modena-Sassuolo">Modena-Sassuolo Terminal</option>
+          <option value="Ferrovia Sassuolo-Reggio Emilia">Sassuolo Radici-Reggio Emilia</option>
+          <option value="Ferrovia Reggio Emilia-Guastalla">Reggio Emilia-Guastalla</option>
+          <option value="Ferrovia Reggio Emilia-Ciano d'Enza">Reggio Emilia-Ciano d'Enza</option>
+          <option value="Ferrovia Parma-Suzzara">2° Bivio /PC Parma Est-Suzzara</option>
+          <option value="Ferrovia Suzzara-Ferrara">Suzzara-Ferrara</option>
+          <option value="Ferrovia Ferrara-Codigoro">Ferrara-Codigoro</option>
+          <option value="Ferrovia Bologna-Portomaggiore">Bologna-Portomaggiore</option>
+          <option value="Ferrovia Casalecchio-Vignola">Casalecchio-Vignola</option>
           <option value="__other__">Altro</option>
         </select>
         <label class="sr-only" for="other-line-input">Inserisci il nome della ferrovia</label>
@@ -50,7 +68,7 @@
       <section id="heading" class="heading" aria-labelledby="page-title" hidden>
         <div>
           <h1 id="page-title">Ferrovia Milano-Bologna</h1>
-          <p id="page-subtitle" class="subtitle">Stazioni e fermate</p>
+          <p id="page-subtitle" class="subtitle">Rete Ferroviaria Italiana SpA</p>
         </div>
         <div class="actions">
           <button id="copy-link" class="quiet-button" type="button">Copia link diretto</button>
@@ -75,10 +93,6 @@
         <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.
       </p>
 
-      <p id="custom-attribution" class="attribution" hidden>
-        Schema ricostruito dal Fascicolo Linea 85 RFI, fiancata principale Lavezzola–Faenza, pp. 133–134.
-      </p>
-
       <section id="empty" class="empty" hidden>
         <h1>Schema non trovato</h1>
         <p id="empty-copy">Nella voce indicata non è stato trovato un diagramma intitolato “Stazioni e fermate”.</p>
@@ -86,6 +100,6 @@
       </section>
     </main>
 
-    <script src="./app.js?v=6" defer></script>
+    <script src="./app.js?v=7" defer></script>
   </body>
 </html>

@@ -2,20 +2,40 @@ const WIKI_ORIGIN = "https://it.wikipedia.org";
 const API_URL = `${WIKI_ORIGIN}/w/api.php`;
 const OTHER_VALUE = "__other__";
 const CUSTOM_FAENZA_LAVEZZOLA = "Schema Faenza-Lavezzola FL85";
+const RFI_MANAGER = "Rete Ferroviaria Italiana SpA";
+const FER_MANAGER = "Ferrovie Emilia-Romagna Srl";
 const LINES = [
-  { label: "Piacenza–Bologna", article: "Ferrovia Milano-Bologna" },
-  { label: "Fidenza–Salsomaggiore", article: "Ferrovia Fidenza-Salsomaggiore" },
-  { label: "Bologna–Pistoia", article: "Ferrovia Bologna-Pistoia" },
-  { label: "Bologna–Rimini", article: "Ferrovia Bologna-Ancona" },
-  { label: "Castel Bolognese–Ravenna", article: "Ferrovia Castel Bolognese-Ravenna" },
-  { label: "Faenza–Ravenna", article: "Ferrovia Faenza-Ravenna" },
-  { label: "Ferrara–Rimini", article: "Ferrovia Ferrara-Rimini" },
-  { label: "Occhiobello–Bologna", article: "Ferrovia Padova-Bologna" },
-  { label: "Bologna–Prato", article: "Ferrovia Bologna-Firenze (direttissima)" },
-  { label: "Poggio Rusco–Bologna", article: "Ferrovia Verona-Bologna" },
-  { label: "Lavino–Bologna San Ruffillo", article: "Linea di cintura di Bologna" },
-  { label: "Suzzara–Modena", article: "Ferrovia Verona-Mantova-Modena" },
-  { label: "Faenza–Lavezzola", article: CUSTOM_FAENZA_LAVEZZOLA, custom: true }
+  { label: "Piacenza-Bologna", article: "Ferrovia Milano-Bologna", manager: RFI_MANAGER },
+  { label: "Castel San Giovanni-Piacenza", article: "Ferrovia Alessandria-Piacenza", manager: RFI_MANAGER },
+  { label: "Codogno-Piacenza", article: "Ferrovia Milano-Bologna", manager: RFI_MANAGER },
+  { label: "Fidenza-Salsomaggiore Terme", article: "Ferrovia Fidenza-Salsomaggiore", manager: RFI_MANAGER },
+  { label: "Fidenza-Fornovo", article: "Ferrovia Fidenza-Fornovo", manager: RFI_MANAGER },
+  { label: "Parma-Vezzano Ligure (Pontremolese)", article: "Ferrovia Pontremolese", manager: RFI_MANAGER },
+  { label: "Parma-Mezzani Rondani", article: "Ferrovia Brescia-Parma", manager: RFI_MANAGER },
+  { label: "Bologna–Pistoia", article: "Ferrovia Bologna-Pistoia", manager: RFI_MANAGER },
+  { label: "Bologna–Rimini", article: "Ferrovia Bologna-Ancona", manager: RFI_MANAGER },
+  { label: "Castel Bolognese–Ravenna", article: "Ferrovia Castel Bolognese-Ravenna", manager: RFI_MANAGER },
+  { label: "Faenza–Ravenna", article: "Ferrovia Faenza-Ravenna", manager: RFI_MANAGER },
+  { label: "Ferrara–Rimini", article: "Ferrovia Ferrara-Rimini", manager: RFI_MANAGER },
+  { label: "Occhiobello–Bologna", article: "Ferrovia Padova-Bologna", manager: RFI_MANAGER },
+  { label: "Bologna–Prato", article: "Ferrovia Bologna-Firenze (direttissima)", manager: RFI_MANAGER },
+  { label: "Poggio Rusco–Bologna", article: "Ferrovia Verona-Bologna", manager: RFI_MANAGER },
+  { label: "Lavino–Bologna San Ruffillo", article: "Linea di cintura di Bologna", manager: RFI_MANAGER },
+  { label: "Suzzara–Modena", article: "Ferrovia Verona-Mantova-Modena", manager: RFI_MANAGER },
+  { label: "Faenza-Lavezzola", article: CUSTOM_FAENZA_LAVEZZOLA, manager: RFI_MANAGER, custom: true },
+  { label: "Cremona-Fidenza", article: "Ferrovia Cremona-Fidenza", manager: RFI_MANAGER },
+  { label: "Faenza-Marradi", article: "Ferrovia Faentina", manager: RFI_MANAGER },
+  { label: "Milano-Bologna AV/AC", article: "Ferrovia Milano-Bologna (alta velocità)", manager: RFI_MANAGER },
+  { label: "Bologna-Firenze AV/AC", article: "Ferrovia Bologna-Firenze (alta velocità)", manager: RFI_MANAGER },
+  { label: "Modena-Sassuolo Terminal", article: "Ferrovia Modena-Sassuolo", manager: FER_MANAGER },
+  { label: "Sassuolo Radici-Reggio Emilia", article: "Ferrovia Sassuolo-Reggio Emilia", manager: FER_MANAGER },
+  { label: "Reggio Emilia-Guastalla", article: "Ferrovia Reggio Emilia-Guastalla", manager: FER_MANAGER },
+  { label: "Reggio Emilia-Ciano d'Enza", article: "Ferrovia Reggio Emilia-Ciano d'Enza", manager: FER_MANAGER },
+  { label: "2° Bivio /PC Parma Est-Suzzara", article: "Ferrovia Parma-Suzzara", manager: FER_MANAGER },
+  { label: "Suzzara-Ferrara", article: "Ferrovia Suzzara-Ferrara", manager: FER_MANAGER },
+  { label: "Ferrara-Codigoro", article: "Ferrovia Ferrara-Codigoro", manager: FER_MANAGER },
+  { label: "Bologna-Portomaggiore", article: "Ferrovia Bologna-Portomaggiore", manager: FER_MANAGER },
+  { label: "Casalecchio-Vignola", article: "Ferrovia Casalecchio-Vignola", manager: FER_MANAGER }
 ];
 const DEFAULT_LINE = LINES[0];
 
@@ -35,11 +55,14 @@ const elements = {
   shell: document.querySelector("#diagram-shell"),
   diagram: document.querySelector("#diagram"),
   wikiAttribution: document.querySelector("#wiki-attribution"),
-  customAttribution: document.querySelector("#custom-attribution"),
   licenseSource: document.querySelector("#license-source"),
   empty: document.querySelector("#empty"),
   emptyCopy: document.querySelector("#empty-copy")
 };
+
+[...elements.select.options].forEach((option) => {
+  if (option.value !== OTHER_VALUE) option.value = option.textContent.trim();
+});
 
 function normalizeTitle(value) {
   try {
@@ -67,7 +90,7 @@ function resolveLine(value) {
     ? title
     : `Ferrovia ${title.replace(/[–—]/g, "-")}`;
   const label = article.replace(/^(ferrovia|linea)\s+/i, "");
-  return { label, article, manual: true };
+  return { label, article, manager: "Gestore infrastruttura non indicato", manual: true };
 }
 
 function setManualMode(enabled, value = "") {
@@ -160,91 +183,22 @@ function prepareDiagram(table) {
   return clone;
 }
 
-const FAENZA_LAVEZZOLA_STOPS = [
-  { km: "17+052", name: "Faenza", kind: "station", branch: "per Bologna, Firenze e Rimini" },
-  { km: "16+107", name: "Ponte", kind: "bridge", note: "opera indicata nel Fascicolo Linea 85" },
-  { km: "8+137 / 7+621", name: "Granarolo Faentino", kind: "station", branch: "per Ravenna", note: "termine tratto elettrificato da Faenza" },
-  { km: "4+189", name: "Cotignola", kind: "station" },
-  { km: "13+968 / 0+000", name: "Lugo", kind: "station", branch: "per Castel Bolognese e Ravenna", note: "cambio progressiva chilometrica" },
-  { km: "4+000 circa", name: "Ponte sul fiume Santerno", kind: "bridge", note: "tra Lugo e Sant’Agata sul Santerno" },
-  { km: "5+442", name: "Sant’Agata sul Santerno", kind: "station" },
-  { km: "8+182", name: "Massa Lombarda", kind: "station" },
-  { km: "13+062", name: "San Patrizio", kind: "station" },
-  { km: "15+423", name: "Conselice", kind: "station" },
-  { km: "18+516", name: "Conselice Zona Industriale", kind: "station" },
-  { km: "22+196", name: "Lavezzola", kind: "station", branch: "per Ferrara e Rimini" }
-];
-
 function renderCustomDiagram() {
   const wrapper = document.createElement("div");
   wrapper.className = "custom-route-wrap";
-
-  const summary = document.createElement("div");
-  summary.className = "custom-route-summary";
-  ["39,248 km", "binario semplice", "3 kV CC Faenza–Granarolo"].forEach((value) => {
-    const item = document.createElement("span");
-    item.textContent = value;
-    summary.append(item);
-  });
-
-  const table = document.createElement("table");
-  table.className = "custom-route";
-  table.innerHTML = `
-    <caption>Schema della linea</caption>
-    <colgroup><col class="km-column"><col class="track-column"><col class="place-column"><col class="note-column"></colgroup>
-    <thead><tr><th>PK</th><th aria-label="Tracciato"></th><th>Località di servizio</th><th>Collegamenti e note</th></tr></thead>
-  `;
-
-  const body = document.createElement("tbody");
-  FAENZA_LAVEZZOLA_STOPS.forEach((stop) => {
-    const row = document.createElement("tr");
-    row.className = `route-row route-${stop.kind}`;
-
-    const km = document.createElement("td");
-    km.className = "route-km";
-    km.textContent = stop.km;
-
-    const symbol = document.createElement("td");
-    symbol.className = `route-symbol${stop.branch ? " has-branch" : ""}`;
-    if (stop.kind === "bridge") {
-      symbol.innerHTML = `<img class="route-icon route-bridge-icon" src="https://upload.wikimedia.org/wikipedia/commons/d/df/BSicon_WBR%C3%9CCKE1_red.svg" width="26" height="26" alt="Ponte">`;
-    } else {
-      symbol.innerHTML = `<img class="route-icon route-station-icon" src="https://upload.wikimedia.org/wikipedia/commons/7/76/BSicon_BHF.svg" width="20" height="20" alt="Stazione">`;
-    }
-
-    const place = document.createElement("td");
-    place.className = "route-place";
-    const name = document.createElement(stop.kind === "bridge" ? "span" : "strong");
-    name.textContent = stop.name;
-    place.append(name);
-
-    const details = document.createElement("td");
-    details.className = "route-details";
-    if (stop.branch) {
-      const branch = document.createElement("span");
-      branch.className = "route-connection";
-      branch.textContent = `→ ${stop.branch}`;
-      details.append(branch);
-    }
-    if (stop.note) {
-      const note = document.createElement("small");
-      note.textContent = stop.note;
-      details.append(note);
-    }
-
-    row.append(km, symbol, place, details);
-    body.append(row);
-  });
-  table.append(body);
-
-  wrapper.append(summary, table);
+  const image = document.createElement("img");
+  image.className = "custom-route-image";
+  image.src = "./faenza-lavezzola.svg";
+  image.alt = "Schema della linea Faenza-Lavezzola";
+  image.width = 380;
+  image.height = 645;
+  wrapper.append(image);
   return wrapper;
 }
 
 function setSourceMode(isCustom) {
   elements.sourceLink.hidden = isCustom;
   elements.wikiAttribution.hidden = isCustom;
-  elements.customAttribution.hidden = !isCustom;
 }
 
 function setView(view) {
@@ -253,7 +207,6 @@ function setView(view) {
   elements.shell.hidden = view !== "result";
   if (view !== "result") {
     elements.wikiAttribution.hidden = true;
-    elements.customAttribution.hidden = true;
   }
   elements.empty.hidden = view !== "empty";
 }
@@ -267,11 +220,11 @@ function updateLocation(title) {
 
 async function loadLine(rawValue, shouldUpdateLocation = true) {
   const line = resolveLine(rawValue);
-  elements.select.value = line.manual ? OTHER_VALUE : line.article;
+  elements.select.value = line.manual ? OTHER_VALUE : line.label;
   setManualMode(Boolean(line.manual), line.manual ? line.label : "");
   elements.statusTitle.textContent = "Caricamento dello schema…";
   elements.statusCopy.textContent = line.custom
-    ? "Ricostruzione dal Fascicolo Linea 85 RFI."
+    ? "Caricamento dello schema allegato."
     : "Recupero la versione più recente da Wikipedia.";
   setView("loading");
 
@@ -280,9 +233,9 @@ async function loadLine(rawValue, shouldUpdateLocation = true) {
       elements.diagram.classList.add("custom-diagram");
       elements.diagram.replaceChildren(renderCustomDiagram());
       elements.title.textContent = line.label;
-      elements.subtitle.textContent = "Schema linea · Fascicolo Linea 85";
-      document.title = `${line.label} · Fascicolo Linea 85`;
-      if (shouldUpdateLocation) updateLocation(line.article);
+      elements.subtitle.textContent = line.manager;
+      document.title = `${line.label} · Schemi ferroviari`;
+      if (shouldUpdateLocation) updateLocation(line.label);
       setView("result");
       setSourceMode(true);
       return;
@@ -299,11 +252,11 @@ async function loadLine(rawValue, shouldUpdateLocation = true) {
     elements.diagram.classList.remove("custom-diagram");
     elements.diagram.replaceChildren(prepareDiagram(table));
     elements.title.textContent = line.label;
-    elements.subtitle.textContent = "Stazioni e fermate";
+    elements.subtitle.textContent = line.manager;
     elements.sourceLink.href = pageUrl;
     elements.licenseSource.href = pageUrl;
-    document.title = `${line.label} · Stazioni e fermate`;
-    if (shouldUpdateLocation) updateLocation(line.article);
+    document.title = `${line.label} · Schemi ferroviari`;
+    if (shouldUpdateLocation) updateLocation(line.label);
     setView("result");
     setSourceMode(false);
   } catch (error) {
