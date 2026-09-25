@@ -7,13 +7,15 @@ const FER_MANAGER = "Ferrovie Emilia-Romagna Srl";
 const LINES = [
   { label: "Piacenza-Bologna", article: "Ferrovia Milano-Bologna", manager: RFI_MANAGER },
   { label: "Castel San Giovanni-Piacenza", article: "Ferrovia Alessandria-Piacenza", manager: RFI_MANAGER },
+  { label: "Piacenza-Cremona", article: "Ferrovia Piacenza-Cremona", manager: RFI_MANAGER },
   { label: "Codogno-Piacenza", article: "Ferrovia Milano-Bologna", manager: RFI_MANAGER },
   { label: "Fidenza-Salsomaggiore Terme", article: "Ferrovia Fidenza-Salsomaggiore", manager: RFI_MANAGER },
-  { label: "Fidenza-Fornovo", article: "Ferrovia Fidenza-Fornovo", manager: RFI_MANAGER },
+  { label: "Fidenza-Fornovo di Taro", article: "Ferrovia Fidenza-Fornovo", manager: RFI_MANAGER, aliases: ["Fidenza-Fornovo"] },
   { label: "Parma-Vezzano Ligure (Pontremolese)", article: "Ferrovia Pontremolese", manager: RFI_MANAGER },
   { label: "Parma-Mezzani Rondani", article: "Ferrovia Brescia-Parma", manager: RFI_MANAGER },
   { label: "Bologna–Pistoia", article: "Ferrovia Bologna-Pistoia", manager: RFI_MANAGER },
   { label: "Bologna–Rimini", article: "Ferrovia Bologna-Ancona", manager: RFI_MANAGER },
+  { label: "Rimini-Ancona", article: "Ferrovia Bologna-Ancona", manager: RFI_MANAGER },
   { label: "Castel Bolognese–Ravenna", article: "Ferrovia Castel Bolognese-Ravenna", manager: RFI_MANAGER },
   { label: "Faenza–Ravenna", article: "Ferrovia Faenza-Ravenna", manager: RFI_MANAGER },
   { label: "Ferrara–Rimini", article: "Ferrovia Ferrara-Rimini", manager: RFI_MANAGER },
@@ -21,10 +23,11 @@ const LINES = [
   { label: "Bologna–Prato", article: "Ferrovia Bologna-Firenze (direttissima)", manager: RFI_MANAGER },
   { label: "Poggio Rusco–Bologna", article: "Ferrovia Verona-Bologna", manager: RFI_MANAGER },
   { label: "Lavino–Bologna San Ruffillo", article: "Linea di cintura di Bologna", manager: RFI_MANAGER },
+  { label: "Linea di cintura Bologna", article: "Linea di cintura di Bologna", manager: RFI_MANAGER },
   { label: "Suzzara–Modena", article: "Ferrovia Verona-Mantova-Modena", manager: RFI_MANAGER },
   { label: "Faenza-Lavezzola", article: CUSTOM_FAENZA_LAVEZZOLA, manager: RFI_MANAGER, custom: true },
   { label: "Cremona-Fidenza", article: "Ferrovia Cremona-Fidenza", manager: RFI_MANAGER },
-  { label: "Faenza-Marradi", article: "Ferrovia Faentina", manager: RFI_MANAGER },
+  { label: "Faenza-Marradi (Faentina)", article: "Ferrovia Faentina", manager: RFI_MANAGER, aliases: ["Faenza-Marradi"] },
   { label: "Milano-Bologna AV/AC", article: "Ferrovia Milano-Bologna (alta velocità)", manager: RFI_MANAGER },
   { label: "Bologna-Firenze AV/AC", article: "Ferrovia Bologna-Firenze (alta velocità)", manager: RFI_MANAGER },
   { label: "Modena-Sassuolo Terminal", article: "Ferrovia Modena-Sassuolo", manager: FER_MANAGER },
@@ -82,7 +85,8 @@ function resolveLine(value) {
   const normalized = title.toLocaleLowerCase("it");
   const preset = LINES.find((line) =>
     line.article.toLocaleLowerCase("it") === normalized ||
-    line.label.toLocaleLowerCase("it") === normalized
+    line.label.toLocaleLowerCase("it") === normalized ||
+    line.aliases?.some((alias) => alias.toLocaleLowerCase("it") === normalized)
   );
   if (preset) return preset;
 
