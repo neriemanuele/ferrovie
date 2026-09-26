@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SIRER - Reti autostradali dell'Emilia-Romagna">
+<title>SIRER - Reti autostradali</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@500&display=swap">
+<link rel="stylesheet" href="./styles.css?v=9">
+<style>
+.road-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.5rem}
+.road-actions{display:flex;gap:.7rem;flex-wrap:wrap}
+.route-card{background:#fff;border:1px solid var(--line);border-top:5px solid var(--road);border-radius:10px;box-shadow:var(--shadow);overflow:auto;padding:1.5rem}
+.route-title{text-align:center;margin:0 0 .2rem;font-size:1.2rem}.route-sub{text-align:center;color:var(--muted);margin:0 0 1.5rem}
+.a14{width:min(820px,100%);margin:auto}.dir{display:grid;grid-template-columns:1fr 126px 1fr;align-items:end;margin-bottom:.45rem;font-size:.9rem}.dir .tar{text-align:right;color:#079326}.dir .bol{text-align:left;color:#E51A38}.route{position:relative}
+.route:before{content:"";position:absolute;top:0;bottom:0;left:50%;width:74px;transform:translateX(-50%);background:linear-gradient(90deg,#e8ed21 0 2px,#747474 2px 35px,#09972b 35px 39px,#747474 39px 72px,#e8ed21 72px 74px);box-shadow:inset 18px 0 0 rgba(255,255,255,.04),inset -18px 0 0 rgba(255,255,255,.04)}
+.r{position:relative;display:grid;grid-template-columns:1fr 126px 1fr;min-height:64px;align-items:center}.r:after{content:"";position:absolute;left:calc(50% - 37px);right:calc(50% - 37px);top:50%;height:2px;background:#eff31b}.label{font-size:.86rem;line-height:1.2}.left{text-align:right;padding-right:12px}.right{text-align:left;padding-left:12px}.km{font-size:.76rem;color:#0a8f32}.km.rev{color:#e65d43}.place{color:#c9d000}.service{color:#269bb8}.route-badge{display:inline-block;padding:.18rem .4rem;background:#168047;color:#fff;border-radius:3px;font-size:.74rem}.node{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);width:20px;height:12px;background:#eff31b;border:1px solid #222;clip-path:polygon(0 50%,30% 0,100% 0,100% 100%,30% 100%)}
+.note{margin-top:1rem;color:var(--muted);font-size:.78rem;text-align:center}
+@media(max-width:650px){.road-head{align-items:flex-start;flex-direction:column}.route-card{padding:.75rem}.a14{min-width:590px}}
+</style>
+</head>
+<body class="road-page">
+<header class="topbar">
+<a class="sirer-logo" href="./" aria-label="SIRER"><span class="sirer-symbol" aria-hidden="true"><span></span><span></span><span></span></span><span class="sirer-word">SIRER</span></a>
+<div class="network-switch"><label class="sr-only" for="network-select">Seleziona la rete</label><select id="network-select"><option value="./">🚆 Reti ferroviarie</option><option value="./autostrade.html" selected>🛣 Reti autostradali</option></select></div>
+<form class="line-form" id="road-form"><label class="sr-only" for="road-select">Seleziona autostrada</label><select id="road-select"><option value="A14">Autostrada A14</option><option value="other">Altro</option></select><input id="other-road" placeholder="Es. Autostrada A1" hidden><button id="road-go" hidden>Visualizza</button></form>
+</header>
+<main>
+<section class="road-head"><div><h1>Autostrada A14</h1><p class="subtitle">Autostrada Adriatica · tratto Emilia-Romagna</p></div><div class="road-actions"><button class="quiet-button" id="copy">Copia link diretto</button><a class="source-link" href="https://it.wikipedia.org/wiki/Autostrada_A14_(Italia)" target="_blank" rel="noopener">Apri la voce originale</a></div></section>
+<section class="route-card"><div class="a14"><h2 class="route-title">BOLOGNA – CATTOLICA</h2><p class="route-sub">Autostrada A14 · schema sperimentale SIRER</p><div class="dir"><div class="tar">↓ direzione Taranto</div><div></div><div class="bol">↑ direzione Bologna</div></div><div class="route" id="route"></div></div></section>
+<p class="note">Dati di percorso ricostruiti dalla tabella “Percorso” della voce Wikipedia “Autostrada A14 (Italia)”. Prototipo grafico SIRER.</p>
+</main>
+<script>
+const rows=[
+["Milano / innesto A1","0,0","743,4","link"],["Area di servizio La Pioppa","2,3","741,1","service"],["Bologna Borgo Panigale · Ramo verde · Aeroporto","4,8","738,6","link"],["Ramo Casalecchio · Bologna Casalecchio · Tangenziale · Firenze","8,5","734,9","link"],["Padova · Bologna Arcoveggio / A13","14,3","729,1","link"],["Bologna Fiera","15,5","727,9","link"],["Bologna San Lazzaro · Tangenziale","22,2","721,2","link"],["Area di servizio Sillaro","37,5","705,9","service"],["Castel San Pietro Terme","38,1","705,3","exit"],["Imola","50,1","693,3","exit"],["Ravenna · Romea · Venezia / A14 dir","56,7","686,7","link"],["Area di servizio Santerno","59,5","683,9","service"],["Faenza","64,5","678,9","exit"],["Forlì · Castrocaro Terme","81,6","661,8","exit"],["Area di servizio Bevano","89,5","653,9","service"],["Cesena nord · E45 / Orte-Ravenna","93,6","649,8","link"],["Cesena","99,7","643,7","exit"],["Valle del Rubicone","110,1","631,3","exit"],["Area di servizio Rubicone","111,3","630,1","service"],["Rimini nord · Bellaria · Santarcangelo","117,3","626,1","exit"],["Rimini sud · Aeroporto · San Marino","127,4","616,0","link"],["Area di servizio Montefeltro","133,5","609,9","service"],["Riccione","135,4","608,0","exit"],["Cattolica · San Giovanni in Marignano · Gabicce Mare","143,9","599,5","exit"]];
+const el=document.querySelector("#route");
+rows.forEach(([name,km,rev,type])=>{const r=document.createElement("div");r.className="r";const cls=type==="service"?"service":type==="link"?"route-badge":"place";r.innerHTML='<div class="label left"><span class="'+cls+'">'+name+'</span> <span class="km">km '+km+'</span></div><span class="node"></span><div class="label right"><span class="km rev">km '+rev+'</span> <span class="'+cls+'">'+name+'</span></div>';el.append(r)});
+document.querySelector("#network-select").onchange=e=>location.href=e.target.value;
+const sel=document.querySelector("#road-select"),inp=document.querySelector("#other-road"),go=document.querySelector("#road-go");
+sel.onchange=()=>{const other=sel.value==="other";inp.hidden=!other;go.hidden=!other;if(other)inp.focus()};
+document.querySelector("#road-form").onsubmit=e=>{e.preventDefault();if(sel.value==="other"&&inp.value.trim()){window.open("https://it.wikipedia.org/wiki/"+encodeURIComponent(inp.value.trim().replace(/ /g,"_")),"_blank")}};
+document.querySelector("#copy").onclick=async()=>{await navigator.clipboard.writeText(location.href);document.querySelector("#copy").textContent="Link copiato";setTimeout(()=>document.querySelector("#copy").textContent="Copia link diretto",1400)};
+</script>
+</body></html>
