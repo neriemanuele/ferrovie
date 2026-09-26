@@ -246,16 +246,18 @@ h1 {
 }
 
 .custom-route-wrap {
-  width: min(760px, 100%);
+  width: min(380px, 100%);
   margin: 0 auto;
   text-align: center;
 }
 
 .custom-route-image {
   display: block;
-  width: min(100%, 760px);
+  width: 100%;
+  aspect-ratio: 380 / 645;
   height: auto;
   margin: 0 auto;
+  border: 0;
 }
 
 .attribution {
