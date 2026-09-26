@@ -11,7 +11,7 @@ const LINES = [
   { label: "Codogno-Piacenza", article: "Ferrovia Milano-Bologna", manager: RFI_MANAGER, segment: ["158+959 Codogno", "146+823 Piacenza RFI"] },
   { label: "Fidenza-Salsomaggiore Terme", article: "Ferrovia Fidenza-Salsomaggiore", manager: RFI_MANAGER },
   { label: "Fidenza-Fornovo di Taro", article: "Ferrovia Fidenza-Fornovo", manager: RFI_MANAGER, aliases: ["Fidenza-Fornovo"] },
-  { label: "Parma-Vezzano Ligure (Pontremolese)", article: "Ferrovia Pontremolese", manager: RFI_MANAGER, segment: ["0+000 Parma", "Vezzano Ligure"] },
+  { label: "Parma-Vezzano Ligure (Pontremolese)", article: "Ferrovia Pontremolese", manager: RFI_MANAGER, segment: ["0+000 Parma", "Vezzano Ligure"], hideHeadingReferences: true },
   { label: "Parma-Mezzani Rondani", article: "Ferrovia Brescia-Parma", manager: RFI_MANAGER, segment: ["19+681 Mezzani-Rondani", "0+000 Parma"] },
   { label: "Bologna–Pistoia (Porrettana)", article: "Ferrovia Bologna-Pistoia", manager: RFI_MANAGER, aliases: ["Bologna–Pistoia"] },
   { label: "Bologna–Rimini", article: "Ferrovia Bologna-Ancona", manager: RFI_MANAGER, segment: ["0+000 Bologna Centrale", "111+042 Rimini"] },
@@ -294,7 +294,15 @@ async function loadLine(rawValue, shouldUpdateLocation = true) {
     const pageUrl = wikiPageUrl(canonicalTitle);
     elements.diagram.classList.remove("custom-diagram");
     const preparedDiagram = prepareDiagram(table);
-    elements.diagram.replaceChildren(cropDiagram(preparedDiagram, line.segment));
+    const croppedDiagram = cropDiagram(preparedDiagram, line.segment);
+    if (line.hideHeadingReferences) {
+      const headingRow = croppedDiagram.querySelector(":scope > tbody > tr, :scope > tr");
+      headingRow?.querySelectorAll(".reference").forEach((reference) => reference.remove());
+      headingRow?.querySelectorAll("span").forEach((span) => {
+        if (!span.textContent.trim() && !span.querySelector("img")) span.remove();
+      });
+    }
+    elements.diagram.replaceChildren(croppedDiagram);
     elements.title.textContent = line.label;
     elements.subtitle.textContent = line.manager;
     elements.sourceLink.href = pageUrl;
