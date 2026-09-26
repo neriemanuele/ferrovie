@@ -5,29 +5,29 @@ const CUSTOM_FAENZA_LAVEZZOLA = "Schema Faenza-Lavezzola FL85";
 const RFI_MANAGER = "Rete Ferroviaria Italiana SpA";
 const FER_MANAGER = "Ferrovie Emilia-Romagna Srl";
 const LINES = [
-  { label: "Piacenza-Bologna", article: "Ferrovia Milano-Bologna", manager: RFI_MANAGER },
-  { label: "Castel San Giovanni-Piacenza", article: "Ferrovia Alessandria-Piacenza", manager: RFI_MANAGER },
+  { label: "Piacenza-Bologna", article: "Ferrovia Milano-Bologna", manager: RFI_MANAGER, segment: ["146+823 Piacenza RFI", "0+000 Bologna Centrale"] },
+  { label: "Castel San Giovanni-Piacenza", article: "Ferrovia Alessandria-Piacenza", manager: RFI_MANAGER, segment: ["74+635 Castel San Giovanni", "Piacenza RFI"] },
   { label: "Piacenza-Cremona", article: "Ferrovia Piacenza-Cremona", manager: RFI_MANAGER },
-  { label: "Codogno-Piacenza", article: "Ferrovia Milano-Bologna", manager: RFI_MANAGER },
+  { label: "Codogno-Piacenza", article: "Ferrovia Milano-Bologna", manager: RFI_MANAGER, segment: ["158+959 Codogno", "146+823 Piacenza RFI"] },
   { label: "Fidenza-Salsomaggiore Terme", article: "Ferrovia Fidenza-Salsomaggiore", manager: RFI_MANAGER },
   { label: "Fidenza-Fornovo di Taro", article: "Ferrovia Fidenza-Fornovo", manager: RFI_MANAGER, aliases: ["Fidenza-Fornovo"] },
-  { label: "Parma-Vezzano Ligure (Pontremolese)", article: "Ferrovia Pontremolese", manager: RFI_MANAGER },
-  { label: "Parma-Mezzani Rondani", article: "Ferrovia Brescia-Parma", manager: RFI_MANAGER },
+  { label: "Parma-Vezzano Ligure (Pontremolese)", article: "Ferrovia Pontremolese", manager: RFI_MANAGER, segment: ["0+000 Parma", "Vezzano Ligure"] },
+  { label: "Parma-Mezzani Rondani", article: "Ferrovia Brescia-Parma", manager: RFI_MANAGER, segment: ["19+681 Mezzani-Rondani", "0+000 Parma"] },
   { label: "Bologna–Pistoia (Porrettana)", article: "Ferrovia Bologna-Pistoia", manager: RFI_MANAGER, aliases: ["Bologna–Pistoia"] },
-  { label: "Bologna–Rimini", article: "Ferrovia Bologna-Ancona", manager: RFI_MANAGER },
-  { label: "Rimini-Ancona", article: "Ferrovia Bologna-Ancona", manager: RFI_MANAGER },
+  { label: "Bologna–Rimini", article: "Ferrovia Bologna-Ancona", manager: RFI_MANAGER, segment: ["0+000 Bologna Centrale", "111+042 Rimini"] },
+  { label: "Rimini-Ancona", article: "Ferrovia Bologna-Ancona", manager: RFI_MANAGER, segment: ["111+042 Rimini", "203+996 Ancona"] },
   { label: "Castel Bolognese–Ravenna", article: "Ferrovia Castel Bolognese-Ravenna", manager: RFI_MANAGER },
   { label: "Faenza–Ravenna", article: "Ferrovia Faenza-Ravenna", manager: RFI_MANAGER },
   { label: "Ferrara–Rimini", article: "Ferrovia Ferrara-Rimini", manager: RFI_MANAGER },
-  { label: "Occhiobello–Bologna", article: "Ferrovia Padova-Bologna", manager: RFI_MANAGER },
-  { label: "Bologna–Prato (Direttissima)", article: "Ferrovia Bologna-Firenze (direttissima)", manager: RFI_MANAGER, aliases: ["Bologna–Prato"] },
-  { label: "Poggio Rusco–Bologna", article: "Ferrovia Verona-Bologna", manager: RFI_MANAGER },
-  { label: "Linea di cintura Lavino-Bologna San Ruffillo", article: "Linea di cintura di Bologna", manager: RFI_MANAGER, aliases: ["Lavino–Bologna San Ruffillo"] },
+  { label: "Occhiobello–Bologna", article: "Ferrovia Padova-Bologna", manager: RFI_MANAGER, segment: ["54+000 53+654 Occhiobello", "0+000 Bologna Centrale"] },
+  { label: "Bologna–Prato (Direttissima)", article: "Ferrovia Bologna-Firenze (direttissima)", manager: RFI_MANAGER, aliases: ["Bologna–Prato"], segment: ["96+908 Bologna Centrale", "16+386 Prato Centrale"] },
+  { label: "Poggio Rusco–Bologna", article: "Ferrovia Verona-Bologna", manager: RFI_MANAGER, segment: ["59+430 Poggio Rusco", "0+000 Bologna Centrale"] },
+  { label: "Linea di cintura Lavino-Bologna San Ruffillo", article: "Linea di cintura di Bologna", manager: RFI_MANAGER, aliases: ["Lavino–Bologna San Ruffillo"], segment: ["PM Lavino", "per Firenze AV per Firenze Direttissima"] },
   { label: "Linea di cintura Bologna", article: "Linea di cintura di Bologna", manager: RFI_MANAGER },
-  { label: "Suzzara–Modena", article: "Ferrovia Verona-Mantova-Modena", manager: RFI_MANAGER },
+  { label: "Suzzara–Modena", article: "Ferrovia Verona-Mantova-Modena", manager: RFI_MANAGER, segment: ["42+153 Suzzara", "0+000 Modena"] },
   { label: "Faenza-Lavezzola", article: CUSTOM_FAENZA_LAVEZZOLA, manager: RFI_MANAGER, custom: true },
   { label: "Cremona-Fidenza", article: "Ferrovia Cremona-Fidenza", manager: RFI_MANAGER },
-  { label: "Faenza-Marradi (Faentina)", article: "Ferrovia Faentina", manager: RFI_MANAGER, aliases: ["Faenza-Marradi"] },
+  { label: "Faenza-Marradi (Faentina)", article: "Ferrovia Faentina", manager: RFI_MANAGER, aliases: ["Faenza-Marradi"], segment: ["66+619 Marradi", "100+949 Faenza"] },
   { label: "Milano-Bologna AV/AC", article: "Ferrovia Milano-Bologna (alta velocità)", manager: RFI_MANAGER },
   { label: "Bologna-Firenze AV/AC", article: "Ferrovia Bologna-Firenze (alta velocità)", manager: RFI_MANAGER },
   { label: "Modena-Sassuolo Terminal", article: "Ferrovia Modena-Sassuolo", manager: FER_MANAGER },
@@ -187,16 +187,55 @@ function prepareDiagram(table) {
   return clone;
 }
 
+function normalizeDiagramText(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLocaleLowerCase("it");
+}
+
+function cropDiagram(table, segment) {
+  if (!segment) return table;
+
+  const rows = [...table.querySelectorAll(":scope > tbody > tr, :scope > tr")];
+  const findBoundary = (needle) => {
+    const normalizedNeedle = normalizeDiagramText(needle);
+    return rows.findIndex((row) =>
+      normalizeDiagramText(row.textContent).includes(normalizedNeedle)
+    );
+  };
+
+  const firstBoundary = findBoundary(segment[0]);
+  const secondBoundary = findBoundary(segment[1]);
+  if (firstBoundary < 0 || secondBoundary < 0) {
+    console.warn("Impossibile sezionare il diagramma", segment);
+    return table;
+  }
+
+  const start = Math.min(firstBoundary, secondBoundary);
+  const end = Math.max(firstBoundary, secondBoundary);
+  rows.forEach((row, index) => {
+    const text = normalizeDiagramText(row.textContent);
+    const isHeading = index === 0 || textMatchesDiagramHeading(row.textContent);
+    const isFooter = text.includes("manuale legenda convenzioni di stile");
+    if ((index < start || index > end) && !isHeading && !isFooter) row.remove();
+  });
+
+  return table;
+}
+
 function renderCustomDiagram() {
   const wrapper = document.createElement("div");
   wrapper.className = "custom-route-wrap";
-  const image = document.createElement("img");
-  image.className = "custom-route-image";
-  image.src = "./faenza-lavezzola.svg";
-  image.alt = "Schema della linea Faenza-Lavezzola";
-  image.width = 380;
-  image.height = 645;
-  wrapper.append(image);
+  const diagramObject = document.createElement("object");
+  diagramObject.className = "custom-route-image";
+  diagramObject.type = "image/svg+xml";
+  diagramObject.data = "./faenza-lavezzola.svg";
+  diagramObject.setAttribute("aria-label", "Schema della linea Faenza-Lavezzola");
+  wrapper.append(diagramObject);
   return wrapper;
 }
 
@@ -254,7 +293,8 @@ async function loadLine(rawValue, shouldUpdateLocation = true) {
 
     const pageUrl = wikiPageUrl(canonicalTitle);
     elements.diagram.classList.remove("custom-diagram");
-    elements.diagram.replaceChildren(prepareDiagram(table));
+    const preparedDiagram = prepareDiagram(table);
+    elements.diagram.replaceChildren(cropDiagram(preparedDiagram, line.segment));
     elements.title.textContent = line.label;
     elements.subtitle.textContent = line.manager;
     elements.sourceLink.href = pageUrl;
