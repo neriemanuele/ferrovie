@@ -1,10 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 380 645" width="380" height="645" style="background:#ffffff; font-family:sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 645" width="380" height="645" style="background:#ffffff; font-family:'Host Grotesk',Arial,sans-serif; font-weight:500;">
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@500&amp;display=swap");
     /* Tipografia e colori standard Wikipedia */
-    .title { font-size: 13.5px; font-weight: bold; fill: #000000; text-anchor: middle; }
+    .title { font-size: 13.5px; font-weight: 500; fill: #000000; text-anchor: middle; }
     .km { font-size: 12px; fill: #202122; text-anchor: end; }
-    .st-main { font-size: 13px; font-weight: bold; fill: #0645ad; }
-    .st-sec { font-size: 12.5px; font-weight: normal; fill: #0645ad; }
+    .st-main { font-size: 13px; font-weight: 500; fill: #0645ad; }
+    .st-sec { font-size: 12.5px; font-weight: 500; fill: #0645ad; }
     .elev { font-size: 11px; fill: #202122; }
     .note-link { font-size: 11px; fill: #0645ad; }
     .note-gray { font-size: 11px; fill: #202122; }
@@ -57,10 +58,10 @@
   <!-- Connessione Firenze (Faentina) -->
   <line x1="60" y1="36" x2="60" y2="65" class="line-main"/>
   <use href="#arrow-u" x="60" y="37"/>
-  <a xlink:href="https://it.wikipedia.org/wiki/Ferrovia_Faentina" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Ferrovia_Faentina" target="_blank">
     <text x="145" y="44" class="note-link">per Firenze</text>
   </a>
-  <a xlink:href="https://it.wikipedia.org/wiki/Ferrovia_Bologna-Ancona" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Ferrovia_Bologna-Ancona" target="_blank">
     <text x="145" y="58" class="note-link">per Bologna</text>
   </a>
 
@@ -69,13 +70,13 @@
   <!-- Bivio Ancona -->
   <path d="M 60 76 Q 60 86 78 86 L 80 86" class="branch"/>
   <use href="#arrow-r" x="83" y="86"/>
-  <a xlink:href="https://it.wikipedia.org/wiki/Ferrovia_Bologna-Ancona" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Ferrovia_Bologna-Ancona" target="_blank">
     <text x="145" y="89" class="note-link">per Ancona</text>
   </a>
 
   <use href="#icon-bhf" x="60" y="70"/>
   <text x="140" y="74" class="km">17+052</text>
-  <a xlink:href="https://it.wikipedia.org/wiki/Stazione_di_Faenza" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Stazione_di_Faenza" target="_blank">
     <text x="145" y="74" class="st-main">Faenza</text>
   </a>
   <text x="325" y="74" class="elev">34 m s.l.m.</text>
@@ -85,11 +86,11 @@
   <line x1="48" y1="112" x2="72" y2="112" class="bridge-road"/>
   <line x1="47" y1="109" x2="73" y2="109" class="bridge-deck"/>
   <line x1="47" y1="115" x2="73" y2="115" class="bridge-deck"/>
-  <a xlink:href="https://it.wikipedia.org/wiki/Autostrada_A14_(Italia)" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Autostrada_A14_(Italia)" target="_blank">
     <text x="145" y="115" class="note-link">Autostrada A14</text>
   </a>
   <text x="224" y="115" class="note-gray">–</text>
-  <a xlink:href="https://it.wikipedia.org/wiki/Strada_europea_E45" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Strada_europea_E45" target="_blank">
     <text x="235" y="115" class="note-link">Strada europea E45</text>
   </a>
 
@@ -98,14 +99,14 @@
   <!-- Bivio per Russi e Ravenna -->
   <path d="M 60 148 Q 60 158 78 158 L 80 158" class="branch"/>
   <use href="#arrow-r" x="83" y="158"/>
-  <a xlink:href="https://it.wikipedia.org/wiki/Ferrovia_Faenza-Ravenna" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Ferrovia_Faenza-Ravenna" target="_blank">
     <text x="145" y="161" class="note-link">per Ravenna</text>
   </a>
 
   <use href="#icon-bhf" x="60" y="142"/>
   <text x="140" y="139" class="km">8+137</text>
   <text x="140" y="152" class="km" fill="#777777">7+621</text>
-  <a xlink:href="https://it.wikipedia.org/wiki/Stazione_di_Granarolo_Faentino" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Stazione_di_Granarolo_Faentino" target="_blank">
     <text x="145" y="143" class="st-main">Granarolo Faentino</text>
   </a>
   <text x="325" y="143" class="elev">17 m s.l.m.</text>
@@ -114,7 +115,7 @@
   <line x1="60" y1="195" x2="60" y2="245" class="line-main"/>
   <use href="#icon-hst" x="60" y="196"/>
   <text x="140" y="200" class="km">4+189</text>
-  <a xlink:href="https://it.wikipedia.org/wiki/Stazione_di_Cotignola" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Stazione_di_Cotignola" target="_blank">
     <text x="145" y="200" class="st-sec">Cotignola</text>
   </a>
   <text x="325" y="200" class="elev">17 m s.l.m.</text>
@@ -123,7 +124,7 @@
   <line x1="48" y1="222" x2="72" y2="222" class="bridge-road"/>
   <line x1="47" y1="219" x2="73" y2="219" class="bridge-deck"/>
   <line x1="47" y1="225" x2="73" y2="225" class="bridge-deck"/>
-  <a xlink:href="https://it.wikipedia.org/wiki/Autostrada_A14_dir" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Autostrada_A14_dir" target="_blank">
     <text x="145" y="225" class="note-link">Autostrada A14 dir</text>
   </a>
 
@@ -131,7 +132,7 @@
   <!-- Ramo da Castelbolognese -->
   <path d="M 40 258 L 42 258 Q 60 258 60 268" class="branch"/>
   <path d="M 37 258 L 41 255.5 L 41 260.5 Z" fill="#be2d2c"/>
-  <a xlink:href="https://it.wikipedia.org/wiki/Ferrovia_Castelbolognese-Ravenna" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Ferrovia_Castelbolognese-Ravenna" target="_blank">
     <text x="145" y="254" class="note-link">per Castelbolognese</text>
   </a>
 
@@ -139,13 +140,13 @@
   <!-- Ramo per Ravenna -->
   <path d="M 60 286 Q 60 296 78 296 L 80 296" class="branch"/>
   <use href="#arrow-r" x="83" y="296"/>
-  <a xlink:href="https://it.wikipedia.org/wiki/Ferrovia_Castelbolognese-Ravenna" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Ferrovia_Castelbolognese-Ravenna" target="_blank">
     <text x="145" y="299" class="note-link">per Ravenna</text>
   </a>
 
   <use href="#icon-bhf" x="60" y="278"/>
   <text x="140" y="282" class="km">0+000</text>
-  <a xlink:href="https://it.wikipedia.org/wiki/Stazione_di_Lugo" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Stazione_di_Lugo" target="_blank">
     <text x="145" y="282" class="st-main">Lugo</text>
   </a>
   <text x="325" y="282" class="elev">14 m s.l.m.</text>
@@ -153,7 +154,7 @@
   <!-- ====== 5. SANT'AGATA SUL SANTERNO ====== -->
   <use href="#icon-hst" x="60" y="334"/>
   <text x="140" y="338" class="km">5+442</text>
-  <a xlink:href="https://it.wikipedia.org/wiki/Stazione_di_Sant%27Agata_sul_Santerno" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Stazione_di_Sant%27Agata_sul_Santerno" target="_blank">
     <text x="145" y="338" class="st-sec">Sant'Agata sul Santerno</text>
   </a>
   <text x="325" y="338" class="elev">21 m s.l.m.</text>
@@ -163,7 +164,7 @@
   <line x1="45" y1="360" x2="75" y2="360" class="water-line"/>
   <line x1="56" y1="354" x2="56" y2="366" stroke="#000000" stroke-width="1.5"/>
   <line x1="64" y1="354" x2="64" y2="366" stroke="#000000" stroke-width="1.5"/>
-  <a xlink:href="https://it.wikipedia.org/wiki/Santerno" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Santerno" target="_blank">
     <text x="145" y="363" class="note-link" fill="#0088cc">fiume Santerno</text>
   </a>
 
@@ -171,7 +172,7 @@
   <line x1="60" y1="385" x2="60" y2="440" class="line-main"/>
   <use href="#icon-bhf" x="60" y="394"/>
   <text x="140" y="398" class="km">8+182</text>
-  <a xlink:href="https://it.wikipedia.org/wiki/Stazione_di_Massalombarda" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Stazione_di_Massalombarda" target="_blank">
     <text x="145" y="398" class="st-main">Massalombarda <tspan fill="#b80000" font-weight="normal">SAF</tspan><tspan fill="#202122" font-weight="normal"> / RFI</tspan></text>
   </a>
   <text x="325" y="398" class="elev">13 m s.l.m.</text>
@@ -181,7 +182,7 @@
   <line x1="60" y1="440" x2="60" y2="485" class="line-main"/>
   <use href="#icon-hst" x="60" y="442"/>
   <text x="140" y="446" class="km">13+062</text>
-  <a xlink:href="https://it.wikipedia.org/wiki/Stazione_di_San_Patrizio" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Stazione_di_San_Patrizio" target="_blank">
     <text x="145" y="446" class="st-sec">San Patrizio</text>
   </a>
   <text x="325" y="446" class="elev">10 m s.l.m.</text>
@@ -190,7 +191,7 @@
   <line x1="60" y1="485" x2="60" y2="530" class="line-main"/>
   <use href="#icon-bhf" x="60" y="484"/>
   <text x="140" y="488" class="km">15+423</text>
-  <a xlink:href="https://it.wikipedia.org/wiki/Stazione_di_Conselice" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Stazione_di_Conselice" target="_blank">
     <text x="145" y="488" class="st-main">Conselice</text>
   </a>
   <text x="325" y="488" class="elev">7 m s.l.m.</text>
@@ -200,7 +201,7 @@
   <use href="#icon-bst" x="60" y="530"/>
   <text x="140" y="534" class="km">18+516</text>
   <!-- Non ha voce dedicata su it.wiki: punta alla sezione di Conselice -->
-  <a xlink:href="https://it.wikipedia.org/wiki/Conselice" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Conselice" target="_blank">
     <text x="145" y="534" class="st-sec" fill="#202122">Conselice Zona Industriale</text>
   </a>
   <text x="295" y="534" class="elev">* 2022</text>
@@ -209,7 +210,7 @@
   <!-- Ramo da Rimini -->
   <path d="M 40 555 L 42 555 Q 60 555 60 565" class="branch"/>
   <path d="M 37 555 L 41 552.5 L 41 557.5 Z" fill="#be2d2c"/>
-  <a xlink:href="https://it.wikipedia.org/wiki/Ferrovia_Ferrara-Rimini" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Ferrovia_Ferrara-Rimini" target="_blank">
     <text x="145" y="555" class="note-link">per Rimini</text>
   </a>
 
@@ -217,28 +218,28 @@
   <use href="#arrow-d" x="60" y="612"/>
   <use href="#icon-bhf" x="60" y="582"/>
   <text x="140" y="586" class="km">22+196</text>
-  <a xlink:href="https://it.wikipedia.org/wiki/Stazione_di_Lavezzola" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Stazione_di_Lavezzola" target="_blank">
     <text x="145" y="586" class="st-main">Lavezzola</text>
   </a>
   <text x="325" y="586" class="elev">6 m s.l.m.</text>
-  <a xlink:href="https://it.wikipedia.org/wiki/Ferrovia_Ferrara-Rimini" target="_blank">
+  <a href="https://it.wikipedia.org/wiki/Ferrovia_Ferrara-Rimini" target="_blank">
     <text x="145" y="604" class="note-link">per Ferrara</text>
   </a>
 
   <!-- ================= PIÈ DI PAGINA ================= -->
   <line x1="1" y1="624.5" x2="379" y2="624.5" stroke="#a2a9b1" stroke-width="1"/>
   <g transform="translate(190, 636)">
-    <a xlink:href="https://it.wikipedia.org/wiki/Template:Diagramma_fer" target="_blank">
+    <a href="https://it.wikipedia.org/wiki/Template:Diagramma_fer" target="_blank">
       <text x="-82" y="0" class="footer-link">Manuale</text>
     </a>
     <text x="-52" y="0" class="footer-dot">·</text>
     
-    <a xlink:href="https://it.wikipedia.org/wiki/Template:Legenda_linea_ferroviaria" target="_blank">
+    <a href="https://it.wikipedia.org/wiki/Template:Legenda_linea_ferroviaria" target="_blank">
       <text x="-25" y="0" class="footer-link">Legenda</text>
     </a>
     <text x="3" y="0" class="footer-dot">·</text>
     
-    <a xlink:href="https://it.wikipedia.org/wiki/Wikipedia:Convenzioni_di_stile/Diagrammi_ferroviari" target="_blank">
+    <a href="https://it.wikipedia.org/wiki/Wikipedia:Convenzioni_di_stile/Diagrammi_ferroviari" target="_blank">
       <text x="56" y="0" class="footer-link">Convenzioni di stile</text>
     </a>
   </g>
