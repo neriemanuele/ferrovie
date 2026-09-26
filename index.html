@@ -3,24 +3,29 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Visualizza schemi ferroviari da Wikipedia e ricostruzioni basate sui fascicoli linea RFI.">
+    <meta name="description" content="SIRER - Sistema Informativo Reti Emilia-Romagna. Schemi delle reti ferroviarie e autostradali.">
     <meta name="color-scheme" content="light">
-    <title>Schemi ferroviari</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d3156'/%3E%3Cpath d='M9 6h14v14a7 7 0 0 1-14 0V6Zm3 3v6h8V9h-8Zm1 12-4 5m10-5 4 5M8 27h16' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
+    <title>SIRER - Reti ferroviarie</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@500&display=swap">
     <link rel="stylesheet" href="https://it.wikipedia.org/w/load.php?lang=it&modules=mediawiki.skinning.content.parsoid%7Cmediawiki.skinning.interface%7Csite.styles&only=styles&skin=vector-2022">
-    <link rel="stylesheet" href="./styles.css?v=8">
+    <link rel="stylesheet" href="./styles.css?v=9">
   </head>
-  <body>
+  <body class="rail-page">
     <header class="topbar">
-      <a class="brand" href="./" aria-label="Schemi ferroviari Wikipedia">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32" role="img"><path d="M9 5.5h14v14a7 7 0 0 1-14 0v-14Zm3 3v6.5h8V8.5h-8Zm1 12.5-4 5m10-5 4 5M7.5 27h17"/></svg>
-        </span>
-        <span>Schemi ferroviari</span>
+      <a class="sirer-logo" href="./" aria-label="SIRER - Sistema Informativo Reti Emilia-Romagna">
+        <span class="sirer-symbol" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="sirer-word">SIRER</span>
       </a>
+
+      <div class="network-switch">
+        <label class="sr-only" for="network-select">Seleziona la rete</label>
+        <select id="network-select" aria-label="Seleziona la rete">
+          <option value="./" selected>🚆 Reti ferroviarie</option>
+          <option value="./autostrade.html">🛣 Reti autostradali</option>
+        </select>
+      </div>
 
       <form id="line-form" class="line-form" autocomplete="off">
         <label class="sr-only" for="line-select">Seleziona la linea ferroviaria</label>
@@ -69,40 +74,16 @@
 
     <main>
       <section id="heading" class="heading" aria-labelledby="page-title" hidden>
-        <div>
-          <h1 id="page-title">Ferrovia Milano-Bologna</h1>
-          <p id="page-subtitle" class="subtitle">Rete Ferroviaria Italiana SpA</p>
-        </div>
-        <div class="actions">
-          <button id="copy-link" class="quiet-button" type="button">Copia link diretto</button>
-          <a id="source-link" class="source-link" href="#" target="_blank" rel="noopener noreferrer">Apri la voce originale</a>
-        </div>
+        <div><h1 id="page-title">Ferrovia Milano-Bologna</h1><p id="page-subtitle" class="subtitle">Rete Ferroviaria Italiana SpA</p></div>
+        <div class="actions"><button id="copy-link" class="quiet-button" type="button">Copia link diretto</button><a id="source-link" class="source-link" href="#" target="_blank" rel="noopener noreferrer">Apri la voce originale</a></div>
       </section>
-
-      <section id="status" class="status" aria-live="polite">
-        <div class="spinner" aria-hidden="true"></div>
-        <div>
-          <strong id="status-title">Caricamento dello schema…</strong>
-          <p id="status-copy">Recupero la versione più recente da Wikipedia.</p>
-        </div>
-      </section>
-
-      <section id="diagram-shell" class="diagram-shell" aria-label="Diagramma stazioni e fermate" hidden>
-        <div id="diagram" class="mw-parser-output diagram"></div>
-      </section>
-
-      <p id="wiki-attribution" class="attribution" hidden>
-        Contenuto tratto da <a id="license-source" href="#" target="_blank" rel="noopener noreferrer">Wikipedia in italiano</a>, disponibile secondo la licenza
-        <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.
-      </p>
-
-      <section id="empty" class="empty" hidden>
-        <h1>Schema non trovato</h1>
-        <p id="empty-copy">Nella voce indicata non è stato trovato un diagramma intitolato “Stazioni e fermate”.</p>
-        <p>Seleziona un’altra linea dall’elenco in alto.</p>
-      </section>
+      <section id="status" class="status" aria-live="polite"><div class="spinner" aria-hidden="true"></div><div><strong id="status-title">Caricamento dello schema…</strong><p id="status-copy">Recupero la versione più recente da Wikipedia.</p></div></section>
+      <section id="diagram-shell" class="diagram-shell" aria-label="Diagramma stazioni e fermate" hidden><div id="diagram" class="mw-parser-output diagram"></div></section>
+      <p id="wiki-attribution" class="attribution" hidden>Contenuto tratto da <a id="license-source" href="#" target="_blank" rel="noopener noreferrer">Wikipedia in italiano</a>, disponibile secondo la licenza <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.</p>
+      <section id="empty" class="empty" hidden><h1>Schema non trovato</h1><p id="empty-copy">Nella voce indicata non è stato trovato un diagramma intitolato “Stazioni e fermate”.</p><p>Seleziona un’altra linea dall’elenco in alto.</p></section>
     </main>
 
+    <script>document.querySelector('#network-select').addEventListener('change',e=>{window.location.href=e.target.value;});</script>
     <script src="./app.js?v=12" defer></script>
   </body>
 </html>
